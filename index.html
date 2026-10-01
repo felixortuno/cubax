@@ -84,9 +84,10 @@
 <style>
 :root{
 --blue:#006DB6;--blue-d:#00548C;--blue-l:#E8F1F8;--blue-m:#7FB6DE;
---navy:#0A1F33;--navy-2:#0F2A44;--ink:#111A24;--text:#46505C;--muted:#6B7580;
---line:#E1E6EB;--bg:#FFFFFF;--alt:#F4F6F8;
+--navy:#0A1F33;--navy-2:#0F2A44;--ink:#111A24;--text:#46505C;--muted:#5E6974;
+--line:#E1E6EB;--line-2:#D5DCE3;--bg:#FFFFFF;--alt:#F4F6F8;
 --r:10px;--r-sm:6px;
+--ease-out:cubic-bezier(.23,1,.32,1);
 --font:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
 --wrap:1200px;--gut:clamp(20px,4vw,40px);
 }
@@ -94,19 +95,23 @@
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{margin:0;font-family:var(--font);font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
-a{color:var(--blue)}a:hover{color:var(--blue-d)}
-h1,h2,h3{margin:0;font-weight:600;letter-spacing:-0.015em;color:inherit}
-p{margin:0}
+a{color:var(--blue);text-underline-offset:.18em;text-decoration-thickness:1px}a:hover{color:var(--blue-d)}
+::selection{background:var(--blue);color:#fff}
+html{accent-color:var(--blue);scrollbar-color:#B9C3CD transparent}
+h1,h2,h3{margin:0;font-weight:600;letter-spacing:-0.015em;color:inherit;text-wrap:balance}
+p{margin:0;text-wrap:pretty}
 [hidden]{display:none!important}
 section[id]{scroll-margin-top:96px}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gut)}
 .ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip{position:absolute;left:16px;top:-80px;z-index:100;padding:12px 18px;border-radius:var(--r-sm);background:var(--blue);color:#fff;font-weight:600;text-decoration:none}
-.skip:focus{top:16px;color:#fff}
+.skip:focus,.skip:hover{top:16px;color:#fff}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;border-radius:var(--r-sm);font:600 16px/1 var(--font);text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:background .2s,color .2s,border-color .2s;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;border-radius:var(--r-sm);font:600 16px/1 var(--font);text-decoration:none;cursor:pointer;border:1.5px solid transparent;transition:background-color .2s ease,color .2s ease,border-color .2s ease,transform .16s var(--ease-out);white-space:nowrap;font-variant-numeric:tabular-nums}
+.btn:active,.chip:active,.acts a:active,.menu-btn:active,.save-link:active{transform:scale(.97)}
+.btn-sm{min-height:44px;padding:0 16px;font-size:15px}
 .btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--blue-d);color:#fff}
 .btn-outline{background:#fff;color:var(--ink);border-color:#C7CFD8}.btn-outline:hover{border-color:var(--ink);color:var(--ink)}
 .btn-white{background:#fff;color:var(--blue-d)}.btn-white:hover{background:var(--blue-l);color:var(--blue-d)}
@@ -114,8 +119,6 @@ section[id]{scroll-margin-top:96px}
 .btn:focus-visible,.chip:focus-visible,summary:focus-visible,.menu-btn:focus-visible,a:focus-visible{outline:3px solid var(--blue-m);outline-offset:3px}
 
 /* section heads */
-.kicker{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
-.kicker::before{content:"";width:28px;height:2px;background:currentColor}
 .h2{font-size:clamp(30px,3.6vw,46px);line-height:1.12}
 .lead{font-size:clamp(17px,1.4vw,19px);color:var(--text);max-width:560px}
 .sec{padding:clamp(64px,8vw,112px) 0}
@@ -124,14 +127,13 @@ section[id]{scroll-margin-top:96px}
 .sec-head p{color:var(--text)}
 
 /* topbar */
-.topbar{background:var(--navy);color:rgba(255,255,255,.82);font-size:14px}
+.topbar{background:var(--navy);color:rgba(255,255,255,.82);font-size:14px;font-variant-numeric:tabular-nums}
 .topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:42px}
 .topbar a{color:#fff;text-decoration:none;font-weight:500}.topbar a:hover{color:var(--blue-m)}
 .tb-left,.tb-right{display:flex;align-items:center;gap:24px}
 .tb-item{display:flex;align-items:center;gap:8px}
 .tb-item .ic{width:16px;height:16px;color:var(--blue-m)}
-.dot{width:8px;height:8px;border-radius:50%;background:#2BD47D;box-shadow:0 0 0 0 rgba(43,212,125,.5);animation:pulse 2s infinite}
-@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(43,212,125,0)}100%{box-shadow:0 0 0 0 rgba(43,212,125,0)}}
+.dot{width:8px;height:8px;border-radius:50%;background:#2BD47D;flex-shrink:0}
 
 /* header */
 .hdr{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -154,30 +156,30 @@ section[id]{scroll-margin-top:96px}
 .hero{padding:clamp(40px,6vw,88px) 0 clamp(56px,7vw,96px);background:#fff;border-bottom:1px solid var(--line)}
 .hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(32px,5vw,64px);align-items:stretch}
 .hero-copy{display:flex;flex-direction:column;justify-content:center;gap:26px}
-.badge{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid var(--line);border-radius:var(--r-sm);background:#fff;font-size:14px;font-weight:500;color:var(--text)}
 .h1{font-size:clamp(36px,4.6vw,60px);line-height:1.06;letter-spacing:-0.022em}
-.h1 em{font-style:normal;color:var(--blue)}
 .ctas{display:flex;flex-wrap:wrap;gap:12px}
 .save-link{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;min-height:44px;background:none;border:0;padding:0;cursor:pointer;font:600 15px var(--font);color:var(--blue)}
 .save-link:hover{color:var(--blue-d);text-decoration:underline}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);background:#fff;margin-top:6px}
 .fact{padding:18px 20px}
 .fact+.fact{border-left:1px solid var(--line)}
-.fact b{display:block;font-size:22px;font-weight:600;line-height:1.2;white-space:nowrap}
+.fact b{display:block;font-size:22px;font-weight:600;line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums}
 .fact span{display:block;font-size:14px;color:var(--muted);margin-top:4px;line-height:1.4}
 
-.panel{position:relative;overflow:hidden;border-radius:var(--r);background:var(--blue);color:#fff;padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;justify-content:space-between;gap:32px;min-height:540px;box-shadow:0 24px 60px -24px rgba(0,60,110,.45)}
-.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.16);pointer-events:none}
-.panel-top,.panel-mid,.panel-bot{position:relative}
+.panel{position:relative;border-radius:var(--r);background:var(--blue);color:#fff;padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:clamp(18px,2.2vw,26px);box-shadow:0 30px 60px -30px rgba(0,0,0,.4)}
 .panel-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
-.eyebrow-w{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
 .panel-top img{height:26px;width:auto}
-.big{font-size:clamp(84px,9vw,128px);font-weight:300;line-height:.9;letter-spacing:-0.04em}
-.panel-mid p{font-size:19px;opacity:.9;margin-top:12px}
-.checks{display:flex;flex-direction:column;gap:8px}
-.check{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:var(--r-sm);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);font-size:15px;font-weight:500}
-.panel-bot{display:flex;flex-direction:column;gap:18px}
-.group-line{display:flex;align-items:center;gap:12px;padding-top:18px;border-top:1px solid rgba(255,255,255,.22);font-size:13px;opacity:.9}
+.status{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(8,19,31,.24);font-size:14px;font-weight:500}
+.fleet-art{margin:0;padding:8px 0 4px;color:var(--blue-l)}
+.fleet-art svg{display:block;width:100%;height:auto;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
+.fleet-art .g{opacity:.45}
+.fleet-art .hose{stroke:#fff}
+.fleet-art .d{stroke-dasharray:1;stroke-dashoffset:0}
+.panel-title{font-size:clamp(21px,1.9vw,25px);font-weight:600;line-height:1.3;letter-spacing:-.01em}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.checks li{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.45;color:var(--blue-l)}
+.checks .ic{width:18px;height:18px;margin-top:2px;color:#fff}
+.group-line{display:flex;align-items:center;gap:12px;margin-top:auto;padding-top:18px;border-top:1px solid rgba(255,255,255,.22);font-size:13px;color:var(--blue-l)}
 .group-line img{height:16px;width:auto}
 
 /* steps */
@@ -187,7 +189,7 @@ section[id]{scroll-margin-top:96px}
 .step:last-child .step-n{background:var(--blue);color:#fff}
 .step::before{content:"";position:absolute;top:28px;left:56px;right:0;height:1.5px;background:var(--line)}
 .step:last-child::before{display:none}
-.step h3{font-size:21px;line-height:1.25;margin-bottom:10px}
+.step h3{font-size:21px;line-height:1.3;margin-bottom:10px}
 .step p{color:var(--text);font-size:16px}
 .step .tag{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:13px;font-weight:600;color:var(--blue)}
 .step .tag .ic{width:16px;height:16px}
@@ -196,12 +198,10 @@ section[id]{scroll-margin-top:96px}
 .dark{background:var(--navy);color:#fff;position:relative;overflow:hidden}
 .dark::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:56px 56px;pointer-events:none}
 .dark .wrap{position:relative}
-.dark .kicker{color:var(--blue-m)}
 .dark .sec-head p{color:rgba(255,255,255,.72)}
-.eq-lbl{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue-m)}
+.eq-lbl{font-size:15px;font-weight:600;color:var(--blue-m)}
 .fleet{display:grid;grid-template-columns:minmax(0,62fr) minmax(0,52fr);gap:16px}
-.tk{border:1px solid rgba(255,255,255,.14);border-radius:var(--r);background:rgba(255,255,255,.03);padding:30px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s,background .2s}
-.tk:hover{border-color:rgba(127,182,222,.5);background:rgba(255,255,255,.05)}
+.tk{border:1px solid rgba(255,255,255,.14);border-radius:var(--r);background:rgba(255,255,255,.03);padding:30px;display:flex;flex-direction:column;gap:16px}
 .tk-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .qty{display:inline-flex;align-items:baseline;gap:6px;padding:6px 12px;border-radius:var(--r-sm);background:rgba(127,182,222,.14);color:#fff;font-size:14px;font-weight:500;white-space:nowrap}
 .qty b{font-size:20px;font-weight:600;line-height:1}
@@ -211,44 +211,48 @@ section[id]{scroll-margin-top:96px}
 .tk p{color:rgba(255,255,255,.72);font-size:16px}
 .uses{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:4px}
 .uses span{font-size:13px;font-weight:500;padding:6px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
-.sub-h{display:flex;align-items:center;gap:16px;margin:clamp(40px,5vw,56px) 0 20px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.sub-h::after{content:"";flex:1;height:1px;background:rgba(255,255,255,.14)}
-.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.eq{border:1px solid rgba(255,255,255,.14);border-radius:var(--r);background:rgba(255,255,255,.03);padding:30px;display:flex;flex-direction:column;gap:16px;transition:border-color .2s,background .2s}
-.eq:hover{border-color:rgba(127,182,222,.5);background:rgba(255,255,255,.05)}
-.eq-ic{width:56px;height:56px;border-radius:var(--r-sm);background:rgba(127,182,222,.14);color:var(--blue-m);display:flex;align-items:center;justify-content:center}
-.eq-ic .ic{width:26px;height:26px}
-.eq h3{font-size:22px;line-height:1.25}
+.sub-h{margin:clamp(56px,6vw,80px) 0 28px;font-size:clamp(22px,2vw,26px);line-height:1.3;color:#fff}
+.eq-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px clamp(24px,3vw,40px)}
+.eq{padding-top:24px;border-top:1px solid rgba(255,255,255,.2);display:flex;flex-direction:column;gap:10px}
+.eq-h{display:flex;align-items:center;gap:12px;font-size:20px;line-height:1.3}
+.eq-h .ic{width:22px;height:22px;color:var(--blue-m)}
 .eq p{color:rgba(255,255,255,.72);font-size:16px}
-.fleet-cta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px 32px;margin-top:16px;padding:24px 30px;border-radius:var(--r);background:var(--blue)}
-.fleet-cta p{font-size:17px;color:rgba(255,255,255,.9);max-width:640px}
+.fleet-cta{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px 32px;margin-top:clamp(48px,5vw,64px);padding:24px 30px;border-radius:var(--r);background:var(--blue)}
+.fleet-cta p{font-size:17px;color:var(--blue-l);max-width:640px}
 .fleet-cta strong{color:#fff;font-weight:600}
 
 /* services */
-.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.svc{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,box-shadow .2s}
-.svc:hover{border-color:#C7D6E4;box-shadow:0 14px 34px -22px rgba(10,31,51,.35)}
-.svc h3{font-size:20px;line-height:1.3}
-.svc p{color:var(--text);font-size:16px}
-.svc-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:6px;min-height:44px;font-weight:600;font-size:15px;text-decoration:none}
-.svc-link:hover{text-decoration:underline}
-.svc-link .ic{width:18px;height:18px}
-.svc-urg{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
-.svc-urg:hover{border-color:var(--blue)}
-.svc-tag{position:absolute;top:28px;right:28px;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--r-sm);background:var(--blue);color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em}
+.svc-wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;align-items:stretch}
+.svc-main{background:var(--navy);color:#fff;border-radius:var(--r);padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:14px}
+.svc-main-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px}
+.svc-main-top .ic{width:32px;height:32px;color:var(--blue-m);stroke-width:1.6}
+.svc-badge{padding:5px 12px;border-radius:999px;background:var(--blue);font-size:14px;font-weight:600}
+.svc-main h3{font-size:clamp(26px,2.6vw,34px);line-height:1.15}
+.svc-main p{color:rgba(255,255,255,.78);max-width:40ch}
+.svc-main .checks{margin-top:10px;padding-top:20px;border-top:1px solid rgba(255,255,255,.14)}
+.svc-main .checks .ic{color:var(--blue-m)}
+.svc-main-cta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:auto;padding-top:24px}
+.svc-wa{display:inline-flex;align-items:center;gap:8px;min-height:44px;color:#fff;font-size:15px;font-weight:500;text-decoration:underline;text-decoration-color:rgba(255,255,255,.4)}
+.svc-wa:hover{color:#fff;text-decoration-color:#fff}
+.svc-wa .ic{width:18px;height:18px;color:var(--blue-m)}
+.svc-list{list-style:none;margin:0;padding:0 clamp(20px,2.4vw,32px);background:#fff;border:1px solid var(--line);border-radius:var(--r)}
+.svc-row{display:grid;grid-template-columns:24px minmax(0,1fr) auto;gap:8px 20px;align-items:center;padding:22px 0}
+.svc-row+.svc-row{border-top:1px solid var(--line)}
+.svc-ic{width:24px;height:24px;color:var(--blue);align-self:start;margin-top:2px}
+.svc-row h3{font-size:18px;line-height:1.3}
+.svc-row p{color:var(--text);font-size:15px;line-height:1.5;margin-top:4px}
 .lead strong{color:var(--ink);font-weight:600}
 
 /* clients */
-.cl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.cl{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:12px}
-.cl-ic{width:48px;height:48px;border-radius:var(--r-sm);background:var(--blue-l);color:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
-.cl-ic .ic{width:24px;height:24px}
-.cl h3{font-size:20px}
-.cl p{color:var(--text);font-size:16px}
-.cl-cta{background:var(--blue);border-color:var(--blue);color:#fff;justify-content:space-between}
-.cl-cta p{color:rgba(255,255,255,.85)}
-.cl-cta a{color:#fff;font-weight:600;display:inline-flex;align-items:center;gap:8px;text-decoration:none;min-height:44px}
-.cl-cta a:hover{text-decoration:underline;color:#fff}
+.cl-list{border-top:1px solid var(--line-2)}
+.cl-row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:8px 40px;align-items:start;padding:24px 0;border-bottom:1px solid var(--line-2)}
+.cl-name{display:flex;align-items:center;gap:14px}
+.cl-name .ic{width:22px;height:22px;color:var(--blue)}
+.cl-row h3{font-size:20px;line-height:1.3}
+.cl-row p{color:var(--text)}
+.cl-maint{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px 32px;margin-top:clamp(32px,4vw,48px);padding:28px 32px;border-radius:var(--r);background:var(--blue);color:#fff}
+.cl-maint h3{font-size:22px}
+.cl-maint p{color:var(--blue-l);margin-top:6px;max-width:560px}
 
 /* zone */
 .zone-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:start}
@@ -260,8 +264,7 @@ section[id]{scroll-margin-top:96px}
 .t.l{flex-direction:row-reverse;transform:translate(calc(-100% + 4px),-50%)}
 .t.out{color:var(--muted)}
 .t.out::before{background:#fff;border:1.5px solid var(--muted);width:8px;height:8px}
-.base{position:absolute;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:var(--blue);border:4px solid #fff;box-shadow:0 0 0 0 rgba(0,109,182,.5);animation:pulseb 2.2s infinite;z-index:2}
-@keyframes pulseb{70%{box-shadow:0 0 0 16px rgba(0,109,182,0)}100%{box-shadow:0 0 0 0 rgba(0,109,182,0)}}
+.base{position:absolute;transform:translate(-50%,-50%);width:20px;height:20px;border-radius:50%;background:var(--blue);border:4px solid #fff;outline:1px solid var(--blue);z-index:2}
 .base-l{position:absolute;transform:translateY(-50%);padding:6px 10px;background:var(--blue);color:#fff;border-radius:var(--r-sm);font-size:13px;font-weight:600;white-space:nowrap;z-index:2}
 .legend{position:absolute;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;padding:12px 14px;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:var(--r-sm);font-size:13px;font-weight:500}
 .legend span{display:flex;align-items:center;gap:10px}
@@ -272,9 +275,9 @@ section[id]{scroll-margin-top:96px}
 .zbox{border-radius:var(--r);padding:28px;border:1px solid var(--line);background:#fff}
 .zbox-blue{background:var(--blue);border-color:var(--blue);color:#fff}
 .zbox-blue b{display:block;font-size:clamp(24px,2.4vw,30px);font-weight:600;line-height:1.2;margin:8px 0 10px}
-.zbox-blue p{opacity:.88;font-size:15px}
-.lbl{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.zbox-blue .lbl{color:rgba(255,255,255,.8)}
+.zbox-blue p{color:var(--blue-l);font-size:15px}
+.lbl{display:block;font-size:14px;font-weight:600;color:var(--muted)}
+.zbox-blue .lbl{color:var(--blue-l)}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
 .tags span{padding:7px 12px;border-radius:var(--r-sm);background:var(--alt);font-size:14px;font-weight:500}
 .hr{height:1px;background:var(--line);margin:22px 0}
@@ -290,12 +293,13 @@ section[id]{scroll-margin-top:96px}
 .q-l{display:block;font-size:15px;font-weight:600;margin-bottom:12px}
 .q-l span{font-weight:400;color:var(--muted)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:var(--r-sm);border:1.5px solid #CFD6DE;background:#fff;color:var(--ink);font:500 15px var(--font);cursor:pointer;transition:all .15s}
+.chip{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:var(--r-sm);border:1.5px solid #CFD6DE;background:#fff;color:var(--ink);font:500 15px var(--font);cursor:pointer;transition:background-color .15s ease,border-color .15s ease,color .15s ease,transform .16s var(--ease-out)}
 .chip:hover{border-color:var(--blue)}
 .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
-.input{width:100%;max-width:420px;height:50px;padding:0 16px;border-radius:var(--r-sm);border:1.5px solid #CFD6DE;font:400 16px var(--font);color:var(--ink);background:#fff}
+.input{width:100%;max-width:420px;height:50px;padding:0 16px;border-radius:var(--r-sm);border:1.5px solid #CFD6DE;font:400 16px var(--font);color:var(--ink);background:#fff;caret-color:var(--blue);transition:border-color .15s ease,box-shadow .15s ease}
+.input::placeholder{color:var(--muted)}
 .input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(0,109,182,.15)}
-.chat{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 20px 50px -28px rgba(10,31,51,.35);position:sticky;top:110px}
+.chat{background:#fff;border-radius:var(--r);overflow:hidden;box-shadow:0 24px 48px -28px rgba(0,0,0,.3);position:sticky;top:110px}
 .chat-h{display:flex;align-items:center;gap:14px;padding:18px 22px;background:var(--navy);color:#fff}
 .av{width:44px;height:44px;border-radius:50%;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .av img{width:auto;height:24px}
@@ -309,25 +313,24 @@ section[id]{scroll-margin-top:96px}
 .chat-f small{display:block;text-align:center;font-size:13px;color:var(--muted);margin-top:4px}
 
 /* save */
-.save{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,4vw,56px);align-items:center;background:var(--blue);color:#fff;border-radius:var(--r);padding:clamp(32px,5vw,64px);position:relative;overflow:hidden}
-.save>*:not(.ring){position:relative}
-.save .kicker{color:rgba(255,255,255,.85)}
+.save{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,4vw,56px);align-items:center;background:var(--blue);color:#fff;border-radius:var(--r);padding:clamp(32px,5vw,64px)}
 .save .h2{font-size:clamp(30px,3.6vw,46px)}
-.save p.s{margin-top:18px;max-width:520px;color:rgba(255,255,255,.88)}
+.save p.s{margin-top:18px;max-width:520px;color:var(--blue-l)}
 .save .ctas{margin-top:28px}
 .saved{margin-top:16px;font-size:14px;display:flex;align-items:center;gap:8px}
-.card{width:100%;max-width:360px;margin:0 auto;background:#fff;color:var(--ink);border-radius:var(--r);padding:30px 26px 24px;box-shadow:0 30px 60px rgba(0,30,60,.35);text-align:center}
+.card{width:100%;max-width:360px;margin:0 auto;background:#fff;color:var(--ink);border-radius:var(--r);padding:30px 26px 24px;box-shadow:0 30px 60px -20px rgba(0,0,0,.35);text-align:center}
 .card .av{width:88px;height:88px;margin:0 auto 14px}
 .card .av img{height:46px}
 .card b{display:block;font-size:22px;font-weight:600}
 .card .sub{font-size:14px;color:var(--muted)}
 .acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0 6px}
 .acts a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 0;border-radius:var(--r-sm);background:var(--blue-l);color:var(--blue);text-decoration:none;font-size:12px;font-weight:600}
-.acts a:hover{background:#D7E7F4}
+.acts a{transition:background-color .15s ease,transform .16s var(--ease-out)}
+.acts a:hover{background:#D7E7F4;color:var(--blue-d)}
 .row{text-align:left;border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
 .row small{display:block;font-size:12px;color:var(--muted)}
 .row div{font-size:15px}
-.row .tel{font-size:18px;font-weight:600;color:var(--blue)}
+.row .tel{font-size:18px;font-weight:600;color:var(--blue);font-variant-numeric:tabular-nums}
 
 /* faq */
 .faq-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:24px 64px;align-items:start}
@@ -337,7 +340,7 @@ section[id]{scroll-margin-top:96px}
 .faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;cursor:pointer;font-size:20px;font-weight:500;color:var(--ink)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary:hover{color:var(--blue)}
-.faq-i{display:flex;flex-shrink:0;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:var(--blue-l);color:var(--blue);transition:transform .25s,background .25s,color .25s}
+.faq-i{display:flex;flex-shrink:0;width:40px;height:40px;align-items:center;justify-content:center;border-radius:50%;background:var(--blue-l);color:var(--blue);transition:transform .25s var(--ease-out),background-color .2s ease,color .2s ease}
 .faq[open] .faq-i{transform:rotate(45deg);background:var(--blue);color:#fff}
 .faq p{padding:0 64px 26px 0;color:var(--text)}
 
@@ -346,10 +349,9 @@ section[id]{scroll-margin-top:96px}
 .foot a{color:rgba(255,255,255,.72);text-decoration:none}.foot a:hover{color:#fff}
 .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.12)}
 .foot-top .h2{font-size:clamp(26px,3vw,38px)}
-.foot-top .h2 span{color:var(--blue-m)}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;padding:44px 0}
 .foot-col{display:flex;flex-direction:column;gap:11px;font-size:15px}
-.foot-col .lbl{color:rgba(255,255,255,.5);margin-bottom:6px}
+.foot-col .lbl{color:#fff;margin-bottom:6px}
 address.foot-col{font-style:normal}
 .foot-txt{color:rgba(255,255,255,.72)}
 .foot-brand{gap:20px}
@@ -360,7 +362,7 @@ address.foot-col{font-style:normal}
 .foot-bot nav{display:flex;gap:20px;flex-wrap:wrap}
 
 /* mobile bar */
-.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(10,31,51,.08)}
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;gap:8px;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(0,0,0,.06)}
 .mbar .btn{flex:1;min-height:48px;padding:0 12px;font-size:15px}
 .mbar .sq{flex:0 0 48px;padding:0}
 
@@ -372,7 +374,6 @@ address.foot-col{font-style:normal}
 @media (max-width:1100px){
 .nav{gap:22px}
 .hero-grid{grid-template-columns:1fr 1fr}
-.cl-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:980px){
 .nav,.hdr-cta .btn-outline,.tb-left .hide-md{display:none}
@@ -381,7 +382,8 @@ address.foot-col{font-style:normal}
 .panel{min-height:0}
 .steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:40px 0}
 .step:nth-child(2)::before{display:none}
-.zone-grid,.price-grid,.save,.sec-head,.faq-wrap{grid-template-columns:1fr}
+.zone-grid,.price-grid,.save,.sec-head,.faq-wrap,.svc-wrap{grid-template-columns:1fr}
+.svc-main-top{padding-bottom:20px}
 .chat{position:static}
 .foot-grid{grid-template-columns:1fr 1fr}
 .foot-brand{grid-column:span 2}
@@ -412,9 +414,13 @@ body{font-size:16px;padding-bottom:74px}
 .step-n{position:absolute;left:0;top:0;margin:0}
 .step::before,.step:nth-child(2)::before{display:block;top:56px;bottom:0;left:27px;right:auto;width:1.5px;height:auto}
 .step:last-child{padding-bottom:0}
-.cl-grid,.svc-grid{grid-template-columns:1fr}
-.eq,.cl,.zbox,.tk,.svc{padding:24px}
-.svc-tag{top:24px;right:24px}
+.zbox,.tk,.svc-main{padding:24px}
+.svc-list{padding:0 20px}
+.svc-row{grid-template-columns:24px minmax(0,1fr)}
+.svc-row .btn{grid-column:2;justify-self:start;margin-top:6px}
+.cl-row{grid-template-columns:1fr}
+.cl-maint{padding:24px}
+.cl-maint .btn{flex:1 1 100%}
 .fleet-cta{padding:24px}
 .fleet-cta .btn{flex:1 1 100%}
 .t{font-size:12px;gap:4px}
@@ -429,7 +435,15 @@ body{font-size:16px;padding-bottom:74px}
 .foot-brand{grid-column:auto}
 .mbar{display:flex}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.dot,.base{animation:none}}
+@media (prefers-reduced-motion:no-preference){
+.fleet-art .d{animation:draw 1.6s var(--ease-out) both}
+.fleet-art .t2 .d{animation-delay:.18s}
+.fleet-art .t3 .d{animation-delay:.32s}
+.fleet-art .g{animation:fade-in .6s ease .6s both}
+@keyframes draw{from{stroke-dashoffset:1}}
+@keyframes fade-in{from{opacity:0}}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -481,7 +495,7 @@ body{font-size:16px;padding-bottom:74px}
 <div class="topbar" id="top">
 <div class="wrap">
 <div class="tb-left">
-<span class="tb-item"><span class="dot"></span>Servicio de urgencias 24 h · 365 días</span>
+<span class="tb-item"><span class="dot"></span>Urgencias 24 horas, los 365 días</span>
 <span class="tb-item hide-md"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Bases en Castellón y Burriana</span>
 </div>
 <div class="tb-right">
@@ -527,8 +541,7 @@ body{font-size:16px;padding-bottom:74px}
 <section class="hero">
 <div class="wrap hero-grid">
 <div class="hero-copy">
-<span class="badge"><span class="dot"></span>Disponibles 24 horas, también festivos</span>
-<h1 class="h1">Desatascos y camión cuba en Castellón, <em>a cualquier hora.</em></h1>
+<h1 class="h1">Desatascos y camión cuba en Castellón, a cualquier hora.</h1>
 <p class="lead">Desatascos urgentes, fosas sépticas y alcantarillado en toda La Plana. <strong>Te damos el precio antes de empezar, sin sorpresas.</strong></p>
 <div class="ctas">
 <a class="btn btn-primary" href="tel:+34607462526"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Llamar al 607 462 526</a>
@@ -542,26 +555,24 @@ body{font-size:16px;padding-bottom:74px}
 </div>
 </div>
 <div class="panel">
-<span class="ring" style="right:-260px;bottom:-300px;width:820px;height:820px"></span>
-<span class="ring" style="right:-170px;bottom:-210px;width:640px;height:640px"></span>
-<span class="ring" style="right:-80px;bottom:-120px;width:460px;height:460px;border-color:rgba(255,255,255,.22)"></span>
-<span class="ring" style="right:10px;bottom:-30px;width:280px;height:280px;background:rgba(0,40,80,.22);border:0"></span>
 <div class="panel-top">
-<span class="eyebrow-w">Servicio de urgencias</span>
 <img src="img/cubax-logo-blanco.png" width="360" height="88" alt="">
+<span class="status"><span class="dot"></span>Urgencias 24 h</span>
 </div>
-<div class="panel-mid">
-<div class="big">24 h</div>
-<p>Noches, fines de semana y festivos.</p>
-</div>
-<div class="panel-bot">
-<div class="checks">
-<div class="check"><svg class="ic" aria-hidden="true"><use href="#i-van"/></svg>Cubas compactas para calles estrechas</div>
-<div class="check"><svg class="ic" aria-hidden="true"><use href="#i-cam"/></svg>Inspección con cámara del origen del atasco</div>
-<div class="check"><svg class="ic" aria-hidden="true"><use href="#i-doc"/></svg>Informe con fotos para seguro o comunidad</div>
-</div>
+<figure class="fleet-art">
+<svg viewBox="0 0 620 360" role="img" aria-label="La flota de Cubax: un camión cuba de gran capacidad y dos compactos">
+<g class="t1" transform="translate(50 0)"><path class="g" d="M10 192H510" stroke-dasharray="3 7"/><rect class="d" pathLength="1" x="44" y="56" width="300" height="110" rx="55"/><path class="d" pathLength="1" d="M100 56v110M290 56v110" opacity=".45"/><rect class="d" pathLength="1" x="150" y="42" width="70" height="14" rx="3"/><path class="d" pathLength="1" d="M232 56v-22h30v22"/><path class="d" pathLength="1" d="M36 170H486"/><path class="d" pathLength="1" d="M352 170V92q0-22 22-22h62l46 50v50"/><path class="d" pathLength="1" d="M376 86h54l34 36h-88z"/><circle class="d" pathLength="1" cx="112" cy="174" r="20"/><circle class="d" pathLength="1" cx="112" cy="174" r="7"/><circle class="d" pathLength="1" cx="164" cy="174" r="20"/><circle class="d" pathLength="1" cx="164" cy="174" r="7"/><circle class="d" pathLength="1" cx="430" cy="174" r="20"/><circle class="d" pathLength="1" cx="430" cy="174" r="7"/><path class="d hose" pathLength="1" d="M44 128c-26 4-30 34-14 50s-8 14-22 14"/><circle class="d" pathLength="1" cx="72" cy="111" r="16"/><circle class="d" pathLength="1" cx="72" cy="111" r="4"/></g>
+<g class="t2" transform="translate(0 150)"><path class="g" d="M4 192H296" stroke-dasharray="3 7"/><rect class="d" pathLength="1" x="36" y="82" width="150" height="84" rx="42"/><path class="d" pathLength="1" d="M92 82v84" opacity=".45"/><rect class="d" pathLength="1" x="104" y="70" width="44" height="12" rx="3"/><path class="d" pathLength="1" d="M156 82V64h22v18"/><path class="d" pathLength="1" d="M28 170H286"/><path class="d" pathLength="1" d="M194 170V112q0-20 20-20h40l32 38v40"/><path class="d" pathLength="1" d="M212 106h38l24 28h-62z"/><circle class="d" pathLength="1" cx="98" cy="174" r="18"/><circle class="d" pathLength="1" cx="98" cy="174" r="6"/><circle class="d" pathLength="1" cx="250" cy="174" r="18"/><circle class="d" pathLength="1" cx="250" cy="174" r="6"/><circle class="d" pathLength="1" cx="62" cy="124" r="13"/><circle class="d" pathLength="1" cx="62" cy="124" r="3.5"/><path class="d hose" pathLength="1" d="M36 136c-20 4-24 26-12 38s-6 18-18 18"/></g>
+<g class="t3" transform="translate(320 150)"><path class="g" d="M4 192H296" stroke-dasharray="3 7"/><rect class="d" pathLength="1" x="36" y="82" width="150" height="84" rx="42"/><path class="d" pathLength="1" d="M92 82v84" opacity=".45"/><rect class="d" pathLength="1" x="104" y="70" width="44" height="12" rx="3"/><path class="d" pathLength="1" d="M156 82V64h22v18"/><path class="d" pathLength="1" d="M28 170H286"/><path class="d" pathLength="1" d="M194 170V112q0-20 20-20h40l32 38v40"/><path class="d" pathLength="1" d="M212 106h38l24 28h-62z"/><circle class="d" pathLength="1" cx="98" cy="174" r="18"/><circle class="d" pathLength="1" cx="98" cy="174" r="6"/><circle class="d" pathLength="1" cx="250" cy="174" r="18"/><circle class="d" pathLength="1" cx="250" cy="174" r="6"/><circle class="d" pathLength="1" cx="62" cy="124" r="13"/><circle class="d" pathLength="1" cx="62" cy="124" r="3.5"/><path class="d hose" pathLength="1" d="M36 136c-20 4-24 26-12 38s-6 18-18 18"/></g>
+</svg>
+</figure>
+<p class="panel-title">Tres camiones cuba propios. Salimos a cualquier hora, también en festivos.</p>
+<ul class="checks">
+<li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Dos compactas para calles estrechas y garajes</li>
+<li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Una de gran capacidad para fosas y redes grandes</li>
+<li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Inspección con cámara e informe con fotos</li>
+</ul>
 <div class="group-line">Una empresa de <img src="img/grupo-trimodos-blanco.png" width="300" height="41" alt="Grupo Trimodos" loading="lazy"></div>
-</div>
 </div>
 </div>
 </section>
@@ -570,49 +581,32 @@ body{font-size:16px;padding-bottom:74px}
 <div class="wrap">
 <div class="sec-head">
 <div>
-<div class="kicker">Servicios</div>
 <h2 class="h2">Desatascos, fosas sépticas y saneamiento.</h2>
 </div>
 <p>Elige tu servicio y te decimos el precio antes de empezar. Para urgencias, llama: atendemos 24 horas, los 365 días.</p>
 </div>
-<div class="svc-grid">
-<article class="svc svc-urg">
-<span class="svc-tag">24 h</span>
-<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-drop"/></svg></span>
+<div class="svc-wrap">
+<article class="svc-main">
+<div class="svc-main-top"><svg class="ic" aria-hidden="true"><use href="#i-drop"/></svg><span class="svc-badge">24 h</span></div>
 <h3>Desatascos urgentes</h3>
 <p>Fregaderos, inodoros, duchas, bajantes y arquetas. Con agua a alta presión, también de noche y en festivos.</p>
-<a class="svc-link" href="tel:+34607462526"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Llamar al 607 462 526</a>
+<ul class="checks">
+<li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Llegada en menos de 60 min en Castellón ciudad y Grao</li>
+<li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Te damos el precio antes de empezar</li>
+<li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Informe con fotos para el seguro o la comunidad</li>
+</ul>
+<div class="svc-main-cta">
+<a class="btn btn-primary" href="tel:+34607462526"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Llamar al 607 462 526</a>
+<a class="svc-wa" data-wa href="https://wa.me/34607462526" target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use href="#i-wa"/></svg>o escríbenos por WhatsApp</a>
+</div>
 </article>
-<article class="svc">
-<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-septic"/></svg></span>
-<h3>Vaciado de fosas sépticas</h3>
-<p>Vaciamos y limpiamos fosas sépticas y pozos negros, y nos encargamos del traslado de los residuos.</p>
-<a class="svc-link" href="#presupuesto" data-pick-svc="1">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-</article>
-<article class="svc">
-<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-van"/></svg></span>
-<h3>Camión cuba</h3>
-<p>Aspiración y limpieza de arquetas, pozos y redes saturadas. Cuba compacta o de gran capacidad, según el acceso.</p>
-<a class="svc-link" href="#presupuesto" data-pick-svc="2">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-</article>
-<article class="svc">
-<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-cam"/></svg></span>
-<h3>Inspección con cámara</h3>
-<p>Vemos el interior de la tubería y localizamos el atasco o la rotura sin obras. Con informe para el seguro.</p>
-<a class="svc-link" href="#presupuesto" data-pick-svc="3">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-</article>
-<article class="svc">
-<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-sewer"/></svg></span>
-<h3>Limpieza de alcantarillado</h3>
-<p>Alcantarillado, imbornales y redes de saneamiento de comunidades, empresas y ayuntamientos.</p>
-<a class="svc-link" href="#presupuesto" data-pick-svc="4">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-</article>
-<article class="svc">
-<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span>
-<h3>Mantenimiento preventivo</h3>
-<p>Revisiones periódicas de tuberías, bajantes y arquetas para evitar atascos e inundaciones.</p>
-<a class="svc-link" href="#presupuesto" data-pick-svc="5">Pedir propuesta <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-</article>
+<ul class="svc-list">
+<li class="svc-row"><svg class="ic svc-ic" aria-hidden="true"><use href="#i-septic"/></svg><div><h3>Vaciado de fosas sépticas</h3><p>Vaciamos y limpiamos fosas sépticas y pozos negros, y nos encargamos del traslado de los residuos.</p></div><a class="btn btn-outline btn-sm" href="#presupuesto" data-pick-svc="1" aria-label="Pedir precio: vaciado de fosas sépticas">Pedir precio</a></li>
+<li class="svc-row"><svg class="ic svc-ic" aria-hidden="true"><use href="#i-van"/></svg><div><h3>Camión cuba</h3><p>Aspiración y limpieza de arquetas, pozos y redes saturadas. Cuba compacta o de gran capacidad, según el acceso.</p></div><a class="btn btn-outline btn-sm" href="#presupuesto" data-pick-svc="2" aria-label="Pedir precio: camión cuba">Pedir precio</a></li>
+<li class="svc-row"><svg class="ic svc-ic" aria-hidden="true"><use href="#i-cam"/></svg><div><h3>Inspección con cámara</h3><p>Vemos el interior de la tubería y localizamos el atasco o la rotura sin obras. Con informe para el seguro.</p></div><a class="btn btn-outline btn-sm" href="#presupuesto" data-pick-svc="3" aria-label="Pedir precio: inspección con cámara">Pedir precio</a></li>
+<li class="svc-row"><svg class="ic svc-ic" aria-hidden="true"><use href="#i-sewer"/></svg><div><h3>Limpieza de alcantarillado</h3><p>Alcantarillado, imbornales y redes de saneamiento de comunidades, empresas y ayuntamientos.</p></div><a class="btn btn-outline btn-sm" href="#presupuesto" data-pick-svc="4" aria-label="Pedir precio: limpieza de alcantarillado">Pedir precio</a></li>
+<li class="svc-row"><svg class="ic svc-ic" aria-hidden="true"><use href="#i-cal"/></svg><div><h3>Mantenimiento preventivo</h3><p>Revisiones periódicas de tuberías, bajantes y arquetas para evitar atascos e inundaciones.</p></div><a class="btn btn-outline btn-sm" href="#presupuesto" data-pick-svc="5" aria-label="Pedir propuesta: mantenimiento preventivo">Pedir propuesta</a></li>
+</ul>
 </div>
 </div>
 </section>
@@ -621,7 +615,6 @@ body{font-size:16px;padding-bottom:74px}
 <div class="wrap">
 <div class="sec-head">
 <div>
-<div class="kicker">Cómo trabajamos</div>
 <h2 class="h2">Un proceso claro, de la llamada a la tubería limpia.</h2>
 </div>
 <p>Primero localizamos el problema, después lo resolvemos y te lo dejamos documentado. Sin obras innecesarias ni sorpresas.</p>
@@ -631,7 +624,7 @@ body{font-size:16px;padding-bottom:74px}
 <div class="step-n">01</div>
 <h3>Atención inmediata</h3>
 <p>Nos llamas o escribes a cualquier hora. Te pedimos los datos clave y te orientamos sobre la solución y el coste antes de salir.</p>
-<span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>24 h · 365 días</span>
+<span class="tag"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>24 h, 365 días</span>
 </div>
 <div class="step">
 <div class="step-n">02</div>
@@ -659,7 +652,6 @@ body{font-size:16px;padding-bottom:74px}
 <div class="wrap">
 <div class="sec-head">
 <div>
-<div class="kicker">Flota y equipos</div>
 <h2 class="h2">Tres camiones cuba propios para llegar a todas partes.</h2>
 </div>
 <p>Dos cubas compactas para los accesos difíciles y una de gran capacidad para los trabajos de volumen. En cada aviso enviamos el camión que mejor encaja con el acceso y con el trabajo.</p>
@@ -701,27 +693,21 @@ body{font-size:16px;padding-bottom:74px}
 <h3 class="sub-h">Equipos de diagnóstico y limpieza</h3>
 <div class="eq-grid">
 <article class="eq">
-<span class="eq-lbl">Alta presión</span>
-<span class="eq-ic"><svg class="ic" aria-hidden="true"><use href="#i-jet"/></svg></span>
-<h3>Hidrojet de alta presión</h3>
+<h3 class="eq-h"><svg class="ic" aria-hidden="true"><use href="#i-jet"/></svg>Hidrojet de alta presión</h3>
 <p>Agua a presión que elimina grasa, cal, raíces y sedimentos sin dañar la tubería.</p>
 </article>
 <article class="eq">
-<span class="eq-lbl">Inspección</span>
-<span class="eq-ic"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg></span>
-<h3>Cámara CCTV robotizada</h3>
+<h3 class="eq-h"><svg class="ic" aria-hidden="true"><use href="#i-target"/></svg>Cámara CCTV robotizada</h3>
 <p>Vemos el interior de la tubería: atascos, roturas o raíces. Diagnóstico preciso y sin obras.</p>
 </article>
 <article class="eq">
-<span class="eq-lbl">Detección</span>
-<span class="eq-ic"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span>
-<h3>Localización de tuberías</h3>
+<h3 class="eq-h"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg>Localización de tuberías</h3>
 <p>Localizamos tuberías y arquetas ocultas para actuar justo donde hace falta.</p>
 </article>
 </div>
 <div class="fleet-cta">
 <p><strong>¿No sabes qué camión necesitas?</strong> Cuéntanos cómo es el acceso y qué hay que hacer, y enviamos la cuba adecuada.</p>
-<a class="btn btn-white" href="#presupuesto" data-pick-svc="2">Pedir camión cuba <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+<a class="btn btn-white" href="#presupuesto" data-pick-svc="2">Pedir camión cuba</a>
 </div>
 </div>
 </section>
@@ -730,18 +716,20 @@ body{font-size:16px;padding-bottom:74px}
 <div class="wrap">
 <div class="sec-head">
 <div>
-<div class="kicker">Clientes</div>
 <h2 class="h2">Un servicio adaptado a cada tipo de cliente.</h2>
 </div>
 <p>Atendemos urgencias puntuales y gestionamos planes de mantenimiento para quien necesita tranquilidad todo el año.</p>
 </div>
-<div class="cl-grid">
-<article class="cl"><span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg></span><h3>Particulares</h3><p>Fregaderos, inodoros, duchas y desagües. Solución rápida y limpia en tu vivienda.</p></article>
-<article class="cl"><span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-bld"/></svg></span><h3>Comunidades y administradores de fincas</h3><p>Bajantes, garajes, arquetas y zonas comunes, con información clara para el administrador.</p></article>
-<article class="cl"><span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-fac"/></svg></span><h3>Empresas e industria</h3><p>Redes de saneamiento, fosas, limpieza industrial y obstrucciones complejas.</p></article>
-<article class="cl"><span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg></span><h3>Aseguradoras</h3><p>Atención de siniestros de hogar y comunidades con informe fotográfico. <a href="mailto:siniestros@cubax.es">siniestros@cubax.es</a></p></article>
-<article class="cl"><span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-gov"/></svg></span><h3>Ayuntamientos</h3><p>Limpieza de alcantarillado, imbornales y redes públicas con nuestra cuba de gran capacidad.</p></article>
-<article class="cl cl-cta"><div><h3>Mantenimiento preventivo</h3><p style="margin-top:10px">Revisiones periódicas de tuberías y arquetas para evitar atascos e inundaciones.</p></div><a href="#presupuesto" data-pick-svc="5">Solicitar propuesta <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a></article>
+<div class="cl-list">
+<div class="cl-row"><div class="cl-name"><svg class="ic" aria-hidden="true"><use href="#i-home"/></svg><h3>Particulares</h3></div><p>Fregaderos, inodoros, duchas y desagües. Solución rápida y limpia en tu vivienda.</p></div>
+<div class="cl-row"><div class="cl-name"><svg class="ic" aria-hidden="true"><use href="#i-bld"/></svg><h3>Comunidades y administradores de fincas</h3></div><p>Bajantes, garajes, arquetas y zonas comunes, con información clara para el administrador.</p></div>
+<div class="cl-row"><div class="cl-name"><svg class="ic" aria-hidden="true"><use href="#i-fac"/></svg><h3>Empresas e industria</h3></div><p>Redes de saneamiento, fosas, limpieza industrial y obstrucciones complejas.</p></div>
+<div class="cl-row"><div class="cl-name"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><h3>Aseguradoras</h3></div><p>Atención de siniestros de hogar y comunidades con informe fotográfico. <a href="mailto:siniestros@cubax.es">siniestros@cubax.es</a></p></div>
+<div class="cl-row"><div class="cl-name"><svg class="ic" aria-hidden="true"><use href="#i-gov"/></svg><h3>Ayuntamientos</h3></div><p>Limpieza de alcantarillado, imbornales y redes públicas con nuestra cuba de gran capacidad.</p></div>
+</div>
+<div class="cl-maint">
+<div><h3>Mantenimiento preventivo</h3><p>Revisiones periódicas de tuberías y arquetas para evitar atascos e inundaciones.</p></div>
+<a class="btn btn-white" href="#presupuesto" data-pick-svc="5">Solicitar propuesta</a>
 </div>
 </div>
 </section>
@@ -750,7 +738,6 @@ body{font-size:16px;padding-bottom:74px}
 <div class="wrap">
 <div class="sec-head">
 <div>
-<div class="kicker">Área de servicio</div>
 <h2 class="h2">Dos bases para cubrir La Plana, de Torreblanca a Almenara.</h2>
 </div>
 <p>Trabajamos desde Castellón y Burriana. Hacia el sur llegamos casi hasta Sagunt y hacia el norte, la misma distancia: hasta Torreblanca y Alcossebre.</p>
@@ -802,7 +789,7 @@ body{font-size:16px;padding-bottom:74px}
 <div class="tags"><span>Castellón</span><span>Grao de Castellón</span><span>Burriana</span><span>Benicàssim</span><span>Orpesa</span><span>Cabanes</span><span>Torreblanca</span><span>Alcalà-Alcossebre</span><span>Vilafamés</span><span>L'Alcora</span><span>Almassora</span><span>Vila-real</span><span>Onda</span><span>Nules</span><span>Moncofa</span><span>La Vall d'Uixó</span><span>Xilxes</span><span>Almenara</span></div>
 <div class="hr"></div>
 <div class="note"><span class="note-ic"><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg></span><div><strong>¿Fuera del área?</strong> Para comunidades, empresas y aseguradoras valoramos cada servicio. Consúltanos disponibilidad.</div></div>
-<a class="arrow-link" href="#presupuesto">¿No ves tu municipio? Consúltanos <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+<a class="arrow-link" href="#presupuesto">¿No ves tu municipio? Consúltanos</a>
 </div>
 </div>
 </div>
@@ -812,7 +799,6 @@ body{font-size:16px;padding-bottom:74px}
 <section class="sec sec-alt" id="presupuesto">
 <div class="wrap price-grid">
 <div>
-<div class="kicker">Presupuesto</div>
 <h2 class="h2">Solicita precio sin compromiso.</h2>
 <p class="lead" style="margin-top:18px">El coste depende del servicio, del acceso y de la distancia. Indícanos qué necesitas y te enviamos una orientación de precio por WhatsApp.</p>
 <div class="q">
@@ -844,7 +830,7 @@ body{font-size:16px;padding-bottom:74px}
 <aside class="chat" aria-label="Vista previa del mensaje">
 <div class="chat-h">
 <span class="av"><img src="img/cubax-c-blanco.png" width="150" height="200" alt="" loading="lazy"></span>
-<div><b>Cubax · Desatascos 24 h</b><span>WhatsApp y teléfono · 607 462 526</span></div>
+<div><b>Cubax · Desatascos 24 h</b><span>WhatsApp y teléfono: 607 462 526</span></div>
 </div>
 <div class="chat-b">
 <span class="lbl">Tu mensaje</span>
@@ -862,10 +848,7 @@ body{font-size:16px;padding-bottom:74px}
 <section class="sec" id="contacto">
 <div class="wrap">
 <div class="save">
-<span class="ring" style="left:-220px;top:-280px;width:640px;height:640px"></span>
-<span class="ring" style="left:-130px;top:-190px;width:460px;height:460px;border-color:rgba(255,255,255,.2)"></span>
 <div>
-<div class="kicker">Guarda nuestro contacto</div>
 <h2 class="h2">Un atasco nunca avisa. Ten nuestro número antes de necesitarlo.</h2>
 <p class="s">Añade Cubax a los contactos de tu móvil en un solo paso y tendrás el servicio de urgencias a mano cuando lo necesites.</p>
 <div class="ctas">
@@ -895,7 +878,6 @@ body{font-size:16px;padding-bottom:74px}
 <section class="sec" id="preguntas-frecuentes" style="padding-top:0">
 <div class="wrap faq-wrap">
 <div>
-<div class="kicker">Preguntas frecuentes</div>
 <h2 class="h2">Resolvemos tus dudas.</h2>
 <p style="margin-top:16px;color:var(--text)">¿No encuentras lo que buscas? Llámanos al <a href="tel:+34607462526">607 462 526</a> o escribe a <a href="mailto:24h@cubax.es">24h@cubax.es</a>.</p>
 </div>
@@ -916,7 +898,7 @@ body{font-size:16px;padding-bottom:74px}
 <footer class="foot">
 <div class="wrap">
 <div class="foot-top">
-<h2 class="h2">¿Tienes una urgencia? <span>Llámanos ahora.</span></h2>
+<h2 class="h2">¿Tienes una urgencia? Llámanos ahora.</h2>
 <a class="btn btn-primary" href="tel:+34607462526" style="min-height:56px;padding:0 28px;font-size:17px"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>607 462 526</a>
 </div>
 <div class="foot-grid">
@@ -937,7 +919,7 @@ body{font-size:16px;padding-bottom:74px}
 </div>
 <address class="foot-col">
 <span class="lbl">Contacto</span>
-<a href="tel:+34607462526">607 462 526 · 24 h</a>
+<a href="tel:+34607462526">607 462 526 (24 h)</a>
 <a href="mailto:24h@cubax.es">24h@cubax.es</a>
 <a href="mailto:siniestros@cubax.es">siniestros@cubax.es</a>
 <span class="foot-txt">Av. Ferrandis Salvador, 3<br>12100 Grao de Castellón</span>
@@ -953,7 +935,7 @@ body{font-size:16px;padding-bottom:74px}
 </div>
 </div>
 <div class="foot-bot">
-<span>© <span id="yr">2026</span> Desatascos y Limpiezas Cubax S.L. · Grupo Trimodos</span>
+<span>© <span id="yr">2026</span> Desatascos y Limpiezas Cubax S.L., empresa de Grupo Trimodos</span>
 <nav aria-label="Legal"><a href="/aviso-legal">Aviso legal</a><a href="/politica-privacidad">Privacidad</a><a href="/cookies">Cookies</a></nav>
 </div>
 </div>
