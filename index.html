@@ -224,6 +224,20 @@ section[id]{scroll-margin-top:96px}
 .fleet-cta p{font-size:17px;color:rgba(255,255,255,.9);max-width:640px}
 .fleet-cta strong{color:#fff;font-weight:600}
 
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.svc{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:12px;transition:border-color .2s,box-shadow .2s}
+.svc:hover{border-color:#C7D6E4;box-shadow:0 14px 34px -22px rgba(10,31,51,.35)}
+.svc h3{font-size:20px;line-height:1.3}
+.svc p{color:var(--text);font-size:16px}
+.svc-link{display:inline-flex;align-items:center;gap:8px;margin-top:auto;padding-top:6px;min-height:44px;font-weight:600;font-size:15px;text-decoration:none}
+.svc-link:hover{text-decoration:underline}
+.svc-link .ic{width:18px;height:18px}
+.svc-urg{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.svc-urg:hover{border-color:var(--blue)}
+.svc-tag{position:absolute;top:28px;right:28px;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--r-sm);background:var(--blue);color:#fff;font-size:12px;font-weight:600;letter-spacing:.04em}
+.lead strong{color:var(--ink);font-weight:600}
+
 /* clients */
 .cl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .cl{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:12px}
@@ -358,7 +372,7 @@ address.foot-col{font-style:normal}
 @media (max-width:1100px){
 .nav{gap:22px}
 .hero-grid{grid-template-columns:1fr 1fr}
-.cl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cl-grid,.svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:980px){
 .nav,.hdr-cta .btn-outline,.tb-left .hide-md{display:none}
@@ -392,14 +406,15 @@ body{font-size:16px;padding-bottom:74px}
 .fact{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:14px 18px}
 .fact b{font-size:18px}
 .fact span{margin:0;text-align:right}
-.big{font-size:84px}
+.panel{display:none}
 .steps{grid-template-columns:1fr;gap:0}
 .step{padding:0 0 32px 76px}
 .step-n{position:absolute;left:0;top:0;margin:0}
 .step::before,.step:nth-child(2)::before{display:block;top:56px;bottom:0;left:27px;right:auto;width:1.5px;height:auto}
 .step:last-child{padding-bottom:0}
-.cl-grid{grid-template-columns:1fr}
-.eq,.cl,.zbox,.tk{padding:24px}
+.cl-grid,.svc-grid{grid-template-columns:1fr}
+.eq,.cl,.zbox,.tk,.svc{padding:24px}
+.svc-tag{top:24px;right:24px}
 .fleet-cta{padding:24px}
 .fleet-cta .btn{flex:1 1 100%}
 .t{font-size:12px;gap:4px}
@@ -442,6 +457,10 @@ body{font-size:16px;padding-bottom:74px}
 <symbol id="i-fac" viewBox="0 0 24 24"><path d="M2 21V10l6 4V10l6 4V6l8-3v18z"/><path d="M6 18h2M11 18h2M16 18h2"/></symbol>
 <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
 <symbol id="i-gov" viewBox="0 0 24 24"><path d="M3 21h18M5 21V10M10 21V10M14 21V10M19 21V10M2 10L12 3l10 7z"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/><path d="M9 14.5a3 3 0 0 0 3 3"/></symbol>
+<symbol id="i-septic" viewBox="0 0 24 24"><path d="M2 9h20"/><path d="M12 9v3"/><rect x="4" y="12" width="16" height="8" rx="4"/></symbol>
+<symbol id="i-sewer" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7 9h10M6 12h12M7 15h10"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></symbol>
 <symbol id="truck-s" viewBox="0 0 300 210">
 <path d="M4 192H296" stroke-dasharray="3 7" opacity=".5"/>
 <rect x="36" y="82" width="150" height="84" rx="42"/>
@@ -480,7 +499,7 @@ body{font-size:16px;padding-bottom:74px}
 <img class="grp" src="img/grupo-trimodos.png" width="300" height="41" alt="Grupo Trimodos">
 </a>
 <nav class="nav" aria-label="Principal">
-<a href="#como-trabajamos">Cómo trabajamos</a>
+<a href="#servicios">Servicios</a>
 <a href="#flota">Flota</a>
 <a href="#clientes">Clientes</a>
 <a href="#area-de-servicio">Área de servicio</a>
@@ -493,6 +512,7 @@ body{font-size:16px;padding-bottom:74px}
 </div>
 </div>
 <nav class="mnav" id="mnav" aria-label="Menú móvil">
+<a href="#servicios">Servicios</a>
 <a href="#como-trabajamos">Cómo trabajamos</a>
 <a href="#flota">Flota y equipos</a>
 <a href="#clientes">Clientes</a>
@@ -509,7 +529,7 @@ body{font-size:16px;padding-bottom:74px}
 <div class="hero-copy">
 <span class="badge"><span class="dot"></span>Disponibles 24 horas, también festivos</span>
 <h1 class="h1">Desatascos y camión cuba en Castellón, <em>a cualquier hora.</em></h1>
-<p class="lead">Desatascos urgentes, vaciado de fosas sépticas, limpieza de alcantarillado e inspección con cámara para particulares, comunidades, empresas y administraciones. Flota propia de tres camiones cuba y el respaldo de Grupo Trimodos.</p>
+<p class="lead">Desatascos urgentes, fosas sépticas y alcantarillado en toda La Plana. <strong>Te damos el precio antes de empezar, sin sorpresas.</strong></p>
 <div class="ctas">
 <a class="btn btn-primary" href="tel:+34607462526"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Llamar al 607 462 526</a>
 <a class="btn btn-outline" href="#presupuesto">Solicitar presupuesto</a>
@@ -542,6 +562,57 @@ body{font-size:16px;padding-bottom:74px}
 </div>
 <div class="group-line">Una empresa de <img src="img/grupo-trimodos-blanco.png" width="300" height="41" alt="Grupo Trimodos" loading="lazy"></div>
 </div>
+</div>
+</div>
+</section>
+
+<section class="sec sec-alt" id="servicios">
+<div class="wrap">
+<div class="sec-head">
+<div>
+<div class="kicker">Servicios</div>
+<h2 class="h2">Desatascos, fosas sépticas y saneamiento.</h2>
+</div>
+<p>Elige tu servicio y te decimos el precio antes de empezar. Para urgencias, llama: atendemos 24 horas, los 365 días.</p>
+</div>
+<div class="svc-grid">
+<article class="svc svc-urg">
+<span class="svc-tag">24 h</span>
+<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-drop"/></svg></span>
+<h3>Desatascos urgentes</h3>
+<p>Fregaderos, inodoros, duchas, bajantes y arquetas. Con agua a alta presión, también de noche y en festivos.</p>
+<a class="svc-link" href="tel:+34607462526"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Llamar al 607 462 526</a>
+</article>
+<article class="svc">
+<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-septic"/></svg></span>
+<h3>Vaciado de fosas sépticas</h3>
+<p>Vaciamos y limpiamos fosas sépticas y pozos negros, y nos encargamos del traslado de los residuos.</p>
+<a class="svc-link" href="#presupuesto" data-pick-svc="1">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</article>
+<article class="svc">
+<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-van"/></svg></span>
+<h3>Camión cuba</h3>
+<p>Aspiración y limpieza de arquetas, pozos y redes saturadas. Cuba compacta o de gran capacidad, según el acceso.</p>
+<a class="svc-link" href="#presupuesto" data-pick-svc="2">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</article>
+<article class="svc">
+<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-cam"/></svg></span>
+<h3>Inspección con cámara</h3>
+<p>Vemos el interior de la tubería y localizamos el atasco o la rotura sin obras. Con informe para el seguro.</p>
+<a class="svc-link" href="#presupuesto" data-pick-svc="3">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</article>
+<article class="svc">
+<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-sewer"/></svg></span>
+<h3>Limpieza de alcantarillado</h3>
+<p>Alcantarillado, imbornales y redes de saneamiento de comunidades, empresas y ayuntamientos.</p>
+<a class="svc-link" href="#presupuesto" data-pick-svc="4">Pedir precio <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</article>
+<article class="svc">
+<span class="cl-ic"><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg></span>
+<h3>Mantenimiento preventivo</h3>
+<p>Revisiones periódicas de tuberías, bajantes y arquetas para evitar atascos e inundaciones.</p>
+<a class="svc-link" href="#presupuesto" data-pick-svc="5">Pedir propuesta <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</article>
 </div>
 </div>
 </section>
